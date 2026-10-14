@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1326">
+<title>نظام الحضور الذكي</title>
+<style>
+:root{--bg:#0b1326;--panel:#131b2e;--panel2:#171f33;--line:#2d3a52;--text:#dae2fd;--muted:#9aa8c4;--green:#10b981;--blue:#4f46e5;--amber:#f59e0b;--red:#ef4444;--purple:#818cf8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#17264a 0,transparent 34%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:12px 16px;color:white;background:var(--blue);font-weight:700;min-height:44px}button.secondary{background:#222d45;border:1px solid var(--line)}button.green{background:#087f5b}button.danger{background:#7f1d2d}button.small{padding:7px 10px;min-height:34px;font-size:12px;border-radius:9px}
+header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px clamp(16px,4vw,48px);border-bottom:1px solid #26324a;background:#0b1326d9;position:sticky;top:0;z-index:4;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:#10b98122;border:1px solid #10b98166;color:#4edea3;font-size:24px}.brand h1{font-size:19px;margin:0 0 4px}.brand p{font-size:12px;color:var(--muted);margin:0}.date{font-size:13px;color:#b7c5df;text-align:left}
+main{max-width:1250px;margin:auto;padding:26px clamp(14px,3vw,36px) 50px}.welcome{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.welcome h2{font-size:27px;margin:0 0 7px}.welcome p{margin:0;color:var(--muted);font-size:14px}.toolbar{display:flex;gap:9px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.stat,.panel{background:linear-gradient(145deg,#172137,#111a2d);border:1px solid #29364e;border-radius:22px;box-shadow:0 12px 35px #00000012}.stat{padding:18px}.stat-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}.stat-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:18px;background:#ffffff0b}.stat strong{display:block;font-size:30px;margin-top:12px}.stat small{color:var(--muted);font-size:12px}.green-t{color:#4edea3}.red-t{color:#ff7b82}.amber-t{color:#ffc46b}.purple-t{color:#a5a9ff}
+.content{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:18px}.panel{padding:20px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}.panel h3{margin:0;font-size:17px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.search-row{display:flex;gap:8px;margin-bottom:14px}input,select{background:#0c1528;border:1px solid #34415b;border-radius:12px;padding:12px;color:var(--text);outline:none;min-width:0}input:focus,select:focus{border-color:#6366f1;box-shadow:0 0 0 3px #4f46e522}input[type=text]{width:100%}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:right;color:#8fa0bd;font-size:12px;font-weight:500;padding:12px 9px;border-bottom:1px solid var(--line)}td{padding:13px 9px;border-bottom:1px solid #243149;font-size:13px}tbody tr:last-child td{border-bottom:0}.student{display:flex;align-items:center;gap:10px}.avatar{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#29375a;color:#c3c0ff;font-weight:bold}.student-name{font-weight:700}.student-id{font-size:11px;color:var(--muted);margin-top:4px}.chip{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:700}.present{background:#10b98120;color:#4edea3}.absent{background:#ef444420;color:#ff858b}.late{background:#f59e0b22;color:#ffc46b}.excused{background:#818cf822;color:#a5a9ff}.empty{text-align:center;padding:28px;color:var(--muted)}
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.quick-actions button{font-size:12px;padding:11px 8px}.qrbox{border:1px dashed #3e5273;border-radius:18px;background:#0b1427;padding:20px;text-align:center}.qr-placeholder{width:142px;height:142px;margin:0 auto 12px;background:#f5f7ff;border-radius:13px;display:grid;place-items:center;color:#17213a;font-size:13px;font-weight:bold}.qr-placeholder svg{width:118px;height:118px}.qrbox h4{margin:8px 0}.qrbox p{color:var(--muted);font-size:12px;line-height:1.8;margin:7px 0 14px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-grid label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:7px}.form-grid .wide{grid-column:1/-1}.divider{height:1px;background:var(--line);margin:18px 0}.notice{font-size:12px;line-height:1.8;color:#aebbd5;background:#202b42;padding:12px;border-radius:12px;margin-top:13px}.footer{margin-top:20px;text-align:center;color:#70809e;font-size:11px}.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#020617b8;z-index:10;display:grid;place-items:center;padding:15px}.modal-card{width:min(500px,100%);background:#131b2e;border:1px solid #3b4963;border-radius:22px;padding:22px;max-height:90vh;overflow:auto}.modal-card h3{margin:0 0 18px}.modal-actions{display:flex;gap:8px;margin-top:18px}.modal-actions>*{flex:1}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}.date{display:none}}
+@media(max-width:480px){header{padding:13px}.brand h1{font-size:16px}.brand p{font-size:11px}.logo{width:40px;height:40px}.stats{gap:9px}.stat{padding:13px;border-radius:17px}.stat strong{font-size:25px}.stat-top{font-size:11px}.panel{padding:14px;border-radius:18px}.toolbar button{flex:1}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.welcome h2{font-size:23px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">✓</div><div><h1>نظام الحضور الذكي</h1><p>إدارة الحضور والغياب المدرسي</p></div></div>
+ <div class="date" id="today"></div>
+</header>
+<main>
+ <section class="welcome"><div><h2>لوحة متابعة الحضور</h2><p>تابع حالة الطلاب وسجّل الحضور بسهولة.</p></div><div class="toolbar"><button onclick="openStudentModal()">＋ إضافة طالب</button><button class="secondary" onclick="exportCSV()">⇩ تصدير التقرير</button></div></section>
+ <section class="stats">
+  <div class="stat"><div class="stat-top"><span>إجمالي الطلاب</span><span class="stat-icon">♙</span></div><strong id="total">0</strong><small>عدد الطلاب المسجلين</small></div>
+  <div class="stat"><div class="stat-top"><span>حاضر</span><span class="stat-icon green-t">✓</span></div><strong class="green-t" id="presentCount">0</strong><small>تم تسجيل حضورهم اليوم</small></div>
+  <div class="stat"><div class="stat-top"><span>غائب</span><span class="stat-icon red-t">×</span></div><strong class="red-t" id="absentCount">0</strong><small>غياب اليوم</small></div>
+  <div class="stat"><div class="stat-top"><span>متأخر</span><span class="stat-icon amber-t">◷</span></div><strong class="amber-t" id="lateCount">0</strong><small>وصلوا بعد الموعد</small></div>
+ </section>
+ <section class="content">
+  <div class="panel">
+   <div class="panel-head"><div><h3>سجل الطلاب اليومي</h3><div class="sub">غيّر حالة الطالب مباشرة من الجدول</div></div><button class="small secondary" onclick="resetDay()">إعادة ضبط اليوم</button></div>
+   <div class="search-row"><input id="search" type="text" placeholder="ابحث باسم الطالب أو الصف..." oninput="renderStudents()"><select id="filter" onchange="renderStudents()"><option value="all">كل الحالات</option><option value="present">حاضر</option><option value="absent">غائب</option><option value="late">متأخر</option><option value="excused">بعذر</option><option value="unset">غير مسجل</option></select></div>
+   <div class="table-wrap"><table><thead><tr><th>الطالب</th><th>الصف</th><th>الحالة</th><th>الإجراء</th></tr></thead><tbody id="studentsTable"></tbody></table></div>
+   <div class="empty hidden" id="empty">لا توجد نتائج. أضف طالباً أو غيّر البحث.</div>
+  </div>
+  <aside>
+   <div class="panel">
+    <div class="panel-head"><div><h3>تسجيل سريع</h3><div class="sub">اختر الحالة ثم سجّل الطالب</div></div><span class="chip present">مباشر</span></div>
+    <div class="form-grid"><label class="wide">الطالب<select id="quickStudent"></select></label><label class="wide">حالة الحضور<select id="quickStatus"><option value="present">حاضر</option><option value="late">متأخر</option><option value="absent">غائب</option><option value="excused">غائب بعذر</option></select></label></div>
+    <div style="margin-top:12px"><button class="green" style="width:100%" onclick="quickMark()">تأكيد التسجيل</button></div>
+    <div class="divider"></div>
+    <div class="panel-head"><div><h3>رمز QR للحضور</h3><div class="sub">واجهة تجريبية لميزة المسح</div></div></div>
+    <div class="qrbox"><div class="qr-placeholder"><svg viewBox="0 0 100 100" aria-label="رمز QR تجريبي"><rect width="100" height="100" fill="white"/><g fill="#101827"><path d="M5 5h30v30H5zM11 11v18h18V11zM16 16h8v8h-8zM65 5h30v30H65zM71 11v18h18V11zM76 16h8v8h-8zM5 65h30v30H5zM11 71v18h18V71zM16 76h8v8h-8zM43 5h7v7h-7zM50 19h7v7h-7zM40 32h10v7H40zM42 47h8v8h-8zM56 40h7v7h-7zM69 43h7v7h-7zM82 40h12v7H82zM39 60h7v7h-7zM50 61h7v7h-7zM61 56h7v7h-7zM74 59h7v7h-7zM42 76h7v7h-7zM53 84h7v7h-7zM65 72h7v7h-7zM81 77h13v7H81zM88 88h7v7h-7z"/></g></svg></div><h4>تسجيل باستخدام QR</h4><p>امسح رمز QR الخاص بالطالب بالكاميرا لتسجيل حضوره على هذا الهاتف.</p><button class="secondary" onclick="startQrScan()">إعداد المسح</button></div>
+    <div class="notice">💾 تُحفظ بيانات الطلاب وحالات الحضور على هذا الجهاز في المتصفح. لا تُرسل البيانات إلى خادم أو إلى المدرسة تلقائياً.</div>
+   </div>
+  </aside>
+ </section>
+ <div class="footer">نظام الحضور الذكي · نسخة أولية تعمل محلياً على هذا الجهاز</div>
+</main>
+<div class="modal hidden" id="studentModal" role="dialog" aria-modal="true">
+ <div class="modal-card"><h3>إضافة طالب جديد</h3><div class="form-grid"><label class="wide">اسم الطالب<input id="newName" type="text" placeholder="اكتب الاسم الكامل"></label><label>الصف الدراسي<input id="newClass" type="text" placeholder="مثال: الأول أ"></label><label>رقم الطالب (اختياري)<input id="newId" type="text" placeholder="مثال: 1004"></label></div><div class="modal-actions"><button onclick="addStudent()">حفظ الطالب</button><button class="secondary" onclick="closeStudentModal()">إلغاء</button></div></div>
+</div>
+<script>
+const KEY='smartAttendance.v1';
+const todayKey=()=>new Date().toLocaleDateString('en-CA');
+let data=loadData();
+function loadData(){try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&Array.isArray(d.students)){if(d.date!==todayKey()){d.date=todayKey();d.students=d.students.map(s=>({...s,status:'unset',time:''}));localStorage.setItem(KEY,JSON.stringify(d));}return d;}}catch(e){}return {date:todayKey(),students:[]};}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));}
+function statusText(s){return ({present:'حاضر',absent:'غائب',late:'متأخر',excused:'بعذر',unset:'غير مسجل'})[s]||'غير مسجل'}
+function timeNow(){return new Date().toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'});}
+function setStatus(id,status){const s=data.students.find(x=>x.id===id);if(!s)return;s.status=status;s.time=timeNow();save();render();}
+function renderStats(){document.getElementById('total').textContent=data.students.length;for(const st of ['present','absent','late'])document.getElementById(st+'Count').textContent=data.students.filter(s=>s.status===st).length;}
+function renderStudents(){const q=document.getElementById('search').value.trim().toLowerCase(),f=document.getElementById('filter').value;const list=data.students.filter(s=>(s.name+' '+s.className+' '+s.studentNo).toLowerCase().includes(q)&&(f==='all'||s.status===f));const body=document.getElementById('studentsTable');body.innerHTML='';list.forEach(s=>{const tr=document.createElement('tr');const td=document.createElement('td');const student=document.createElement('div');student.className='student';const avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=s.name.trim().charAt(0)||'ط';const details=document.createElement('div');const nm=document.createElement('div');nm.className='student-name';nm.textContent=s.name;const id=document.createElement('div');id.className='student-id';id.textContent=(s.studentNo||'بدون رقم')+(s.time?' · '+s.time:'');details.append(nm,id);student.append(avatar,details);td.append(student);const tc=document.createElement('td');tc.textContent=s.className||'—';const ts=document.createElement('td');const chip=document.createElement('span');chip.className='chip '+(s.status==='unset'?'':s.status);chip.textContent=statusText(s.status);ts.append(chip);const ta=document.createElement('td');const sel=document.createElement('select');sel.className='small';sel.setAttribute('aria-label','تغيير حالة '+s.name);[['unset','غير مسجل'],['present','حاضر'],['late','متأخر'],['absent','غائب'],['excused','بعذر']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;o.selected=s.status===v;sel.append(o)});sel.onchange=()=>{if(sel.value==='unset'){s.status='unset';s.time='';save();render()}else setStatus(s.id,sel.value)};const del=document.createElement('button');del.className='small danger';del.style.marginRight='5px';del.textContent='حذف';del.onclick=()=>deleteStudent(s.id);ta.append(sel,del);tr.append(td,tc,ts,ta);body.append(tr)});document.getElementById('empty').classList.toggle('hidden',list.length>0);renderQuickOptions();}
+function renderQuickOptions(){const sel=document.getElementById('quickStudent'),old=sel.value;sel.innerHTML='';if(!data.students.length){const o=document.createElement('option');o.value='';o.textContent='أضف طالباً أولاً';sel.append(o);sel.disabled=true;return;}sel.disabled=false;data.students.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=s.name+' — '+s.className;o.selected=s.id===old;sel.append(o)});}
+function render(){renderStats();renderStudents();document.getElementById('today').textContent=new Date().toLocaleDateString('ar-IQ',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+function openStudentModal(){document.getElementById('studentModal').classList.remove('hidden');document.getElementById('newName').focus()}
+function closeStudentModal(){document.getElementById('studentModal').classList.add('hidden');}
+function addStudent(){const name=document.getElementById('newName').value.trim(),className=document.getElementById('newClass').value.trim(),studentNo=document.getElementById('newId').value.trim();if(!name){alert('يرجى كتابة اسم الطالب.');return}data.students.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,className,studentNo,status:'unset',time:''});save();document.getElementById('newName').value='';document.getElementById('newClass').value='';document.getElementById('newId').value='';closeStudentModal();render();}
+function deleteStudent(id){const s=data.students.find(x=>x.id===id);if(s&&confirm('هل تريد حذف الطالب «'+s.name+'»؟')){data.students=data.students.filter(x=>x.id!==id);save();render()}}
+function startQrScan(){ if(window.AndroidBridge && AndroidBridge.scanQr){ AndroidBridge.scanQr(); } else { alert('افتح التطبيق على أندرويد لاستخدام الكاميرا.'); } }
+function handleScannedQr(raw){ 
+  const code=String(raw||'').trim();
+  const student=data.students.find(s=>s.studentNo===code || s.id===code || s.name===code);
+  if(student){setStatus(student.id,'present');alert('تم تسجيل حضور: '+student.name);}
+  else {alert('لم يتم العثور على طالب يطابق رمز QR: '+code+'\\nيمكنك جعل محتوى الرمز هو رقم الطالب.');}
+}
+function quickMark(){const id=document.getElementById('quickStudent').value;if(!id){alert('أضف طالباً أولاً.');return}setStatus(id,document.getElementById('quickStatus').value);}
+function resetDay(){if(confirm('هل تريد إعادة حالات جميع الطلاب إلى «غير مسجل» لهذا اليوم؟')){data.students=data.students.map(s=>({...s,status:'unset',time:''}));save();render()}}
+function exportCSV(){if(!data.students.length){alert('لا يوجد طلاب لتصديرهم.');return}const rows=[['اسم الطالب','الصف','رقم الطالب','الحالة','وقت التسجيل'],...data.students.map(s=>[s.name,s.className,s.studentNo,statusText(s.status),s.time||''])];const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='تقرير-الحضور-'+todayKey()+'.csv';a.click();URL.revokeObjectURL(url)}
+document.getElementById('studentModal').addEventListener('click',e=>{if(e.target.id==='studentModal')closeStudentModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStudentModal()});
+render();
+</script>
+</body>
+</html>
